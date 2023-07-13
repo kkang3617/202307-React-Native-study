@@ -1,9 +1,10 @@
 {
     "editor.formatOnSave": true,
-    "semi": false,
+    "semi": true,
     "javascriptEnable" : ["javascript", "javascriptreact"],
     "printWidth" : 80,
     "useTabs": false,
     "tabWidth": 2,
-    "jsxSingleQuote": true
+    "jsxSingleQuote": true,
+    "bracketSpacing": true
 }
