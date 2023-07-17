@@ -34,10 +34,14 @@ const GoalInput = (props) => {
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <Button title='할 일 추가하기' onPress={addGoalHandler} />
+            <Button
+              title='할 일 추가하기'
+              onPress={addGoalHandler}
+              color={"pink"}
+            />
           </View>
           <View style={styles.button}>
-            <Button title='취소' onPress={props.onCancel} />
+            <Button title='취소' onPress={props.onCancel} color={"red"} />
           </View>
         </View>
       </View>
@@ -62,9 +66,12 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#cccccc",
+    borderColor: "#e4d0ff",
+    backgroundColor: "#e4d0ff",
+    color: "#120438",
+    borderRadius: 6,
     width: "100%",
-    padding: 8,
+    padding: 16,
   },
   buttonContainer: {
     marginTop: 16,
