@@ -2,19 +2,15 @@ import { useState } from "react";
 import { Button, FlatList, StyleSheet, TextInput, View } from "react-native";
 
 import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
-  const [enteredGoalText, setEnteredGoalText] = useState("");
   const [todoGoals, setTodoGoals] = useState([]);
 
-  //사용자가 내용을 입력할 때 해당 입력값을 가져오는 함수
-  const goalInputHandler = (enteredText) => {
-    //console.log(enteredText);
-    setEnteredGoalText(enteredText);
-  };
+  
 
   //버튼을 누르면 할 일 목록을 추가하는 함수
-  const addGoalHandler = () => {
+  const addGoalHandler = (enteredGoalText) => {
     // console.log(enteredGoalText);
 
     // useState로 관리하는 상태 변수의 setter 안에 콜백 함수를 작성하면.
@@ -26,16 +22,15 @@ export default function App() {
     console.log(todoGoals);
   };
 
+  const deleteGoalHandler = (id) => {
+    setTodoGoals(currentTodoGoals => {
+      return currentTodoGoals.filter((goal) => goal.id !== id)
+    });
+  };
+
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder='할 일을 입력하세요~!'
-          onChangeText={goalInputHandler}
-        />
-        <Button title='할 일 추가하기' onPress={addGoalHandler} />
-      </View>
+      <GoalInput onAddGoal={addGoalHandler}/>
       <View style={styles.goalsContainer}>
         {/* Scrollview는 전체 화면이 렌더링 될 때 안의 항목들을 전부 렌더링 한다
             이로인해, 성능의 저하가 발생할 수 있다.
@@ -45,7 +40,12 @@ export default function App() {
         <FlatList
           data={todoGoals}
           renderItem={(itemData) => {
-            return <GoalItem text={itemData.item.text} />;
+            return (
+              <GoalItem
+                text={itemData.item.text}
+                onDeleteItem={deleteGoalHandler}
+              />
+            );
           }}
           keyExtractor={(item, index) => {
             return item.id;
@@ -63,22 +63,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 16,
   },
-  inputContainer: {
-    flex: 1, // 1/5 영역차지
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 24,
-    borderBottomWidth: 1, // 할일 목록들 위의 선
-    borderBottomColor: "red",
-  },
-  TextInput: {
-    borderWidth: 1,
-    borderColor: "#cccccc",
-    width: "70%",
-    marginRight: 8,
-    padding: 8,
-  },
+
   goalsContainer: {
     flex: 4, //  4/5 영역차지
   },
