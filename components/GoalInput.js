@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Button, StyleSheet, TextInput, View } from 'react-native'
+import React, { useState } from "react";
+import { Button, Modal, StyleSheet, TextInput, View } from "react-native";
 
 const GoalInput = (props) => {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -16,7 +16,8 @@ const GoalInput = (props) => {
   }
 
   return (
-    <View style={styles.inputContainer}>
+    <Modal>
+      <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
           placeholder='할 일을 입력하세요~!'
@@ -25,26 +26,27 @@ const GoalInput = (props) => {
         />
         <Button title='할 일 추가하기' onPress={addGoalHandler} />
       </View>
+    </Modal>
   );
 };
 
 export default GoalInput;
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        flex: 1, // 1/5 영역차지
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 24,
-        borderBottomWidth: 1, // 할일 목록들 위의 선
-        borderBottomColor: "red",
-      },
-      TextInput: {
-        borderWidth: 1,
-        borderColor: "#cccccc",
-        width: "70%",
-        marginRight: 8,
-        padding: 8,
-      },
+  inputContainer: {
+    flex: 1, // 1/5 영역차지
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
+    borderBottomWidth: 1, // 할일 목록들 위의 선
+    borderBottomColor: "red",
+  },
+  TextInput: {
+    borderWidth: 1,
+    borderColor: "#cccccc",
+    width: "70%",
+    marginRight: 8,
+    padding: 8,
+  },
 });
